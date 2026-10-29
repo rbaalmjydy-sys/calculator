@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My calculator</title>
+
+<style>
+    body {
+        background: #f5eaf0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .calculator {
+ background: #ffffff;
+ padding: 25px;
+ border-radius: 25px;
+ box-shadow: 0 8px 25px #d8bdcc;
+ width: 290px;
+    }
+ h2 {
+   text-align: center;
+   color: #8e5275;
+ }
+
+#display {
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border: 2px solid #ead5e1;
+    border-radius: 12px;
+    font-size: 25px;
+    text-align: right;
+    padding: 10px;
+    background: #fffafd;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4,
+    1fr);
+    gap: 10px;
+}
+button{
+height: 55px;
+border: none;
+border-radius: 12px;
+font-size: 20px;
+cursor: pointer;
+background: #f1e1eb;
+color: #55384b;
+
+}
+
+button :hover {
+    background: #e5c6d9;
+}
+
+.operator {
+    background: #d9a9c5;
+}
+
+.clear  {
+    background: #e8b2b2;
+}
+
+.equal {
+    background: #a66d91;
+    color: white;
+    }
+
+</style>
+</head>
+
+<body>
+    <div class="calculator">
+        <h2>My calculator</h2>
+        <input type="text" id="display"
+        readonly>
+        
+        <div class="buttons">
+            <button class="clear"
+            onclick="clearDisplay () ">c</button>
+            <button
+            onclick="deleteLast () ">-</button>
+            <button class="operator"
+            onclick="addValue('/')">/</button>
+            <button class="operator"
+            onclick="addValue('*')">x</button>
+           
+            <button
+            onclick="addValue('7')">7</button>
+            <button
+            onclick="addValue('8')">8</button>
+            <button
+            onclick="addValue('9')">9</button>
+            <button class="operator"
+            onclick="addValue('-')">-</button>
+            <button
+            onclick="addValue('4')">4</button>
+            <button
+            onclick="addValue('5')">5</button>
+            <button
+            onclick="addValue('6')">6</button>
+            <button class="operator"
+            onclick="addValue('+')">+</button>
+<button
+onclick="addValue('1')">1</button>
+<button
+onclick="addValue('2')">2</button>
+<button
+onclick="addValue('3')">3</button>
+<button
+onclick="addValue('.')">.</button>
+<button
+onclick="addValue('0')">0</button>
+<button
+onclick="addValue('00')">00</button>
+<button class="equal"
+onclick="calculate()" style="grid-column: 
+       span 2">=</button>
+            </div>
+
+        </div>
+    
+        <script>
+            
+            const display = 
+            document.getElementById("display");
+
+            function addValue(value) {
+                display.value += value;
+            }
+            
+            function clearDisplay() {
+                display.value = "";
+            }
+            
+            function deleteLast() {
+                display.value = 
+                display.value.slice(0, -1);
+            }
+            
+            function calculate(){
+                try {
+             if(display.value.trim() === 
+             "") {
+                return;
+            }
+
+            if (!/^[0-9+\-*\/.() ])+ $/.test (display.value)) {
+                display.value = "Error";
+                return;
+            }
+
+           const result = Function(
+            ' "use strict"; return (' 
+            + display.value + ')'
+           ) ();
+
+           display.value = 
+           Number.isFinite(result)
+           ? String(result)
+           : "Erorr";
+        } catch {
+            display.value = "Error";
+        }
+    }
+            </script>
+   <script src="script.js"></script>
+</body>
+
+</html>
